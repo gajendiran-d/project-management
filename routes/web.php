@@ -48,9 +48,3 @@ Route::get('/tasks/status/{id}', [App\Http\Controllers\TaskController::class, 's
 // Team Routes
 Route::get('/teams/{projectId}', [App\Http\Controllers\TeamMemberController::class, 'index'])->name('teams.index');
 Route::post('/teams/assign', [App\Http\Controllers\TeamMemberController::class, 'assign'])->name('teams.assign');
-
-// Test Push Notification
-Route::get('test', function () {
-	event(new App\Events\TaskEvent('Task'));
-	return "Event has been sent!";
-});

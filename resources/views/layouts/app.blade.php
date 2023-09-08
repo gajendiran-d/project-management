@@ -12,8 +12,19 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+        var pusher = new Pusher('81d2b1310344928ee10f', {
+            cluster: 'mt1'
+        });
+        var channel = pusher.subscribe('task-channel');
+        channel.bind('task-event', function(data) {
+            alert(JSON.stringify(data.message));
+        });
+    </script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

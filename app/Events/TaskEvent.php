@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TaskEvent
+class TaskEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $message;
@@ -32,9 +32,14 @@ class TaskEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('pusher');
+        return new Channel('task-channel');
     }
 
+    /**
+     * Broadcast event task.
+     *
+     * @return void
+     */
     public function broadcastAs()
     {
         return 'task-event';

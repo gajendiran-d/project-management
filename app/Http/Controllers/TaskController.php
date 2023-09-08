@@ -185,7 +185,7 @@ class TaskController extends Controller
             $task = Task::findOrFail($id);
             $task->is_completed = '1';
             $task->save();
-            event(new TaskEvent('Task completed')); // Push Notification
+            event(new TaskEvent($task->title. ' has been completed')); // Push Notification
             return redirect()->route('tasks.assign')->with('success', 'Task completed successfully!');
         } catch (\Exception $e) {
             return redirect()->route('tasks.assign')->with('error', $e->getMessage());
